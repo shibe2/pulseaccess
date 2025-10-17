@@ -40,6 +40,8 @@ all_modules = [
   [ 'module-remap-sink', 'module-remap-sink.c' ],
   [ 'module-remap-source', 'module-remap-source.c' ],
   [ 'module-rescue-streams', 'module-rescue-streams.c' ],
+  [ 'module-restricted-protocol-tcp', ['module-restricted-protocol-stub.c', 'protocol-restricted.c'], [], ['-DUSE_PROTOCOL_NATIVE', '-DUSE_TCP_SOCKETS'], dbus_dep ],
+  [ 'module-restricted-protocol-unix', ['module-restricted-protocol-stub.c', 'protocol-restricted.c'], [], ['-DUSE_PROTOCOL_NATIVE', '-DUSE_UNIX_SOCKETS'], dbus_dep ],
   [ 'module-role-cork', ['module-role-cork.c', 'stream-interaction.c'], 'stream-interaction.h' ],
   [ 'module-role-ducking', ['module-role-ducking.c', 'stream-interaction.c'], 'stream-interaction.h' ],
   [ 'module-simple-protocol-tcp', 'module-protocol-stub.c', [], ['-DUSE_PROTOCOL_SIMPLE', '-DUSE_TCP_SOCKETS'], [], libprotocol_simple ],
