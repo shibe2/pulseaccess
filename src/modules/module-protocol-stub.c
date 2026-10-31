@@ -88,7 +88,11 @@
   PA_MODULE_USAGE(SOCKET_USAGE);
 #elif defined(USE_PROTOCOL_NATIVE)
 #  include <pulsecore/protocol-native.h>
+#ifdef RESTRICT_COMMANDS
+#  define TCPWRAP_SERVICE "pulseaudio-restricted"
+#else
 #  define TCPWRAP_SERVICE "pulseaudio-native"
+#endif
 #  define IPV4_PORT PA_NATIVE_DEFAULT_PORT
 #  define UNIX_SOCKET PA_NATIVE_DEFAULT_UNIX_SOCKET
 #  define MODULE_ARGUMENTS_COMMON "cookie", "auth-cookie", "auth-cookie-enabled", "auth-anonymous",
@@ -107,7 +111,11 @@
 #    define SRB_USAGE
 #    endif
 
+#ifdef RESTRICT_COMMANDS
+  PA_MODULE_DESCRIPTION("Restricted native protocol "SOCKET_DESCRIPTION);
+#else
   PA_MODULE_DESCRIPTION("Native protocol "SOCKET_DESCRIPTION);
+#endif
   PA_MODULE_USAGE("auth-anonymous=<don't check for cookies?> "
                   "auth-cookie=<path to cookie file> "
                   "auth-cookie-enabled=<enable cookie authentication?> "
